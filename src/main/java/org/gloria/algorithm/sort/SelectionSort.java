@@ -10,24 +10,6 @@ import java.util.Arrays;
  */
 public class SelectionSort {
 
-    public static void sort(Object[] objects) {
-        int cursor;
-        for (int i = 0; i < objects.length; i++) {
-            cursor = i;
-            for (int j = i; j < objects.length; j++) {
-                if (String.valueOf(objects[cursor]).compareTo(String.valueOf(objects[j])) > 0) {
-                    cursor = j;
-                }
-            }
-            if (cursor != i) {
-                Object temp = objects[i];
-                objects[i] = objects[cursor];
-                objects[cursor] = temp;
-            }
-        }
-
-    }
-
     public static void sort(Integer[] array) {
         int cursor;
         for (int i = 0; i < array.length; i++) {
@@ -43,6 +25,24 @@ public class SelectionSort {
                 array[cursor] = temp;
             }
         }
+    }
+
+    public static <T> void sort(T[] objects) {
+        int cursor;
+        for (int i = 0; i < objects.length; i++) {
+            cursor = i;
+            for (int j = i; j < objects.length; j++) {
+                if (String.valueOf(objects[cursor]).compareTo(String.valueOf(objects[j])) > 0) {
+                    cursor = j;
+                }
+            }
+            if (cursor != i) {
+                T temp = objects[i];
+                objects[i] = objects[cursor];
+                objects[cursor] = temp;
+            }
+        }
+
     }
 
     public static void main(String[] args) {
