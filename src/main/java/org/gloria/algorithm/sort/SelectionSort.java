@@ -1,5 +1,7 @@
 package org.gloria.algorithm.sort;
 
+import java.util.Comparator;
+
 /**
  * Create on 2016/12/17 18:33.
  *
@@ -25,7 +27,7 @@ public class SelectionSort {
         }
     }
 
-    public static <T> void sort(T[] objects) {
+    public static void sort(Comparable[] objects) {
         int min;
         for (int i = 0; i < objects.length; i++) {
             min = i;
@@ -35,7 +37,7 @@ public class SelectionSort {
                 }
             }
             if (min != i) {
-                T temp = objects[i];
+                Comparable temp = objects[i];
                 objects[i] = objects[min];
                 objects[min] = temp;
             }
