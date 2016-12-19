@@ -1,7 +1,5 @@
 package org.gloria.algorithm.sort;
 
-import java.util.Arrays;
-
 /**
  * Create on 2016/12/17 18:33.
  *
@@ -11,51 +9,38 @@ import java.util.Arrays;
 public class SelectionSort {
 
     public static void sort(Integer[] array) {
-        int cursor;
+        int min;
         for (int i = 0; i < array.length; i++) {
-            cursor = i;
+            min = i;
             for (int j = i; j < array.length; j++) {
-                if (array[cursor] > array[j]) {
-                    cursor = j;
+                if (array[min] > array[j]) {
+                    min = j;
                 }
             }
-            if (cursor != i) {
+            if (min != i) {
                 int temp = array[i];
-                array[i] = array[cursor];
-                array[cursor] = temp;
+                array[i] = array[min];
+                array[min] = temp;
             }
         }
     }
 
     public static <T> void sort(T[] objects) {
-        int cursor;
+        int min;
         for (int i = 0; i < objects.length; i++) {
-            cursor = i;
+            min = i;
             for (int j = i; j < objects.length; j++) {
-                if (String.valueOf(objects[cursor]).compareTo(String.valueOf(objects[j])) > 0) {
-                    cursor = j;
+                if (String.valueOf(objects[min]).compareTo(String.valueOf(objects[j])) > 0) {
+                    min = j;
                 }
             }
-            if (cursor != i) {
+            if (min != i) {
                 T temp = objects[i];
-                objects[i] = objects[cursor];
-                objects[cursor] = temp;
+                objects[i] = objects[min];
+                objects[min] = temp;
             }
         }
 
     }
 
-    public static void main(String[] args) {
-        Integer[] array = new Integer[]{3, 7, 1, 2, 0, 8, 3};
-        SelectionSort.sort(array);
-        Arrays.asList(array).forEach(i -> System.out.print(i + ","));
-
-        System.out.println();
-
-        Object[] objects = new Object[]{"abc", "abf", "123", "ggg", "qwe", "qwr","&*("};
-        SelectionSort.sort(objects);
-        Arrays.asList(objects).forEach((o) -> {
-            System.out.print(o + ", ");
-        });
-    }
 }
