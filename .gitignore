@@ -1,2 +1,4 @@
- *.[properties]
- *.[cer]
+.idea/
+common-utils.iml
+src/main/java/org/gloria/resources/
+target/
