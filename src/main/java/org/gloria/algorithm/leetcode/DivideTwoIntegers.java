@@ -41,7 +41,7 @@ public class DivideTwoIntegers {
             return (int)-result;
         }
 
-        if (result >= Integer.MAX_VALUE) {
+        if (result > Integer.MAX_VALUE) {
             result = -1 * ((int) result + 1);
         }
         return (int)result;
@@ -60,7 +60,7 @@ public class DivideTwoIntegers {
 //            absDividend = -(dividend + 1);
 //        }
 //        int absDivisor = Math.abs(divisor);
-//        
+//
 //        int value = 0;
 //
 //        while (absDividend >= 0) {
@@ -80,7 +80,7 @@ public class DivideTwoIntegers {
     @Test
     public void test() {
 //        System.out.println(divide(-2147483648, -1));
-        System.out.println(divide(2147483647, 1));
+        System.out.println(divide(2147483647, -1));
 //        System.out.println(divide(-14, 3));
     }
     
