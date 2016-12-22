@@ -2,3 +2,4 @@
 common-utils.iml
 target/
 *.properties
+*.cer
