@@ -1,12 +1,14 @@
 package org.gloria.http;
 
 import okhttp3.*;
+import okhttp3.internal.http.HttpHeaders;
 
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManagerFactory;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpCookie;
 import java.security.KeyStore;
 import java.security.SecureRandom;
 import java.security.cert.CertificateFactory;
@@ -47,7 +49,7 @@ public class HttpsUtil {
     public static String get(String url) throws IOException {
         
         Request request = new Request.Builder()
-                .url(url).build();
+                .url(url).header("User-Agent","Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1").build();
         Response response = client.newBuilder()
                 .followRedirects(false)             //禁止自动重定向
                 .followSslRedirects(false)
@@ -58,6 +60,19 @@ public class HttpsUtil {
         }
         return body;
     }
+    
+    public static InputStream getAsInputStream(String url) throws IOException{
+        Request request = new Request.Builder()
+                .url(url).build();
+        Response response = client.newBuilder()
+                .followRedirects(false)             //禁止自动重定向
+                .followSslRedirects(false)
+                .build().newCall(request).execute();
+        if (response.isSuccessful()) {
+            return response.body().byteStream();
+        }
+        return null;
+    }
 
     public static String post(String url ,Map<String, String> params) {
         FormBody.Builder builder = new FormBody.Builder();
@@ -66,8 +81,10 @@ public class HttpsUtil {
         
         RequestBody body = builder.build();
 
-        Request request = new Request.Builder().url(url).post(body).build();
-
+        Request request = new Request.Builder().url(url)
+                .header("User-Agent", "Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1")
+                .post(body).build();
+        
         Call call = client.newCall(request);
         try {
             Response response = call.execute();

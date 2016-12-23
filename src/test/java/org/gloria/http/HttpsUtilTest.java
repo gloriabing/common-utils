@@ -24,14 +24,16 @@ import static org.junit.Assert.*;
  */
 public class HttpsUtilTest {
 
-
     @Test
-    public void testZhihuLogin() throws Exception{
-        String url = "https://www.zhihu.com/";
+    public void testZhihuLogin() throws Exception {
+
+        Properties props = ResourcesUtil.getResourceAsProperties(HttpsUtil.class.getClassLoader(), "zhihu.properties");
+
+        String url = "https://www.zhihu.com/#signin";
         String body = HttpsUtil.get(url);
 
         Pattern pattern = Pattern.compile("<input type=\"hidden\" name=\"_xsrf\" value=\"([\\s\\S]*?)\"/>");
-        
+
         Matcher matcher = pattern.matcher(body);
         String xsrfValue = "";
         if (matcher.find()) {
@@ -40,17 +42,16 @@ public class HttpsUtilTest {
 
         url = "https://www.zhihu.com/login/email";
 
-        Properties props = ResourcesUtil.getResourceAsProperties(HttpsUtil.class.getClassLoader(), "zhihu.properties");
         
         Map<String, String> map = new HashMap<>();
         map.put("_xsrf", xsrfValue);
-        map.put("rememberme", "true");
+        map.put("remember_me", " true");
         map.put("email", (String) props.get("username"));
         map.put("password", (String) props.get("password"));
         
         
         System.out.println(HttpsUtil.post(url, map));
-        url = "https://www.zhihu.com/";
+        url = "https://www.zhihu.com/#signin";
         
         body = HttpsUtil.get(url);
 
