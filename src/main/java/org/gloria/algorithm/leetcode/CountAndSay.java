@@ -51,9 +51,36 @@ public class CountAndSay {
         return input;
     }
 
+    public String countAndSay1(int n) {
+        String output = "";
+
+        String input = "1";
+        for (int i = 1; i < n; i++) {
+            int count = 1;
+            int j;
+            for (j = 0; j < input.length() - 1; j++) {
+                if (input.charAt(j) == input.charAt(j + 1)) {
+                    count++;
+                } else {
+                    output += (count + String.valueOf(input.charAt(j)));
+                    count = 1;
+
+                } 
+            }
+            if (input.charAt(input.length() - 1) == input.charAt(j)) {
+                output += (count + String.valueOf(input.charAt(input.length() - 1)));
+            }
+           
+            input = output;
+            output = "";
+        }
+
+        return input;
+    }
+    
     @Test
     public void test() {
-        System.out.println(countAndSay(4));
+        System.out.println(countAndSay1(6));
         
     }
     
