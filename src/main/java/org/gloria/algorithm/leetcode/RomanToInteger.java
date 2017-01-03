@@ -16,13 +16,13 @@ public class RomanToInteger {
         int pre = toNumber(s.charAt(0));
         int result = pre;
         for (int i = 1; i < s.length(); i++) {
-            int thisNum = toNumber(s.charAt(i));
-            if (thisNum > pre) {
-                result = result - pre + (thisNum - pre);
+            int current = toNumber(s.charAt(i));
+            if (current > pre) {
+                result = result - pre + (current - pre);
             } else {
-                result += thisNum;
+                result += current;
             }
-            pre = thisNum;
+            pre = current;
         }
         return result;
     }
@@ -45,12 +45,12 @@ public class RomanToInteger {
             case 'M':
                 return 1000;
         }
-        return -1;
+        return 0;
     }
     
     @Test
     public void test() {
-        String str = "XVII";
+        String str = "XCIX";
         System.out.println(romanToInt(str));
         
     }
