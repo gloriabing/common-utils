@@ -1,4 +1,4 @@
-package org.gloria.zhihu.utils;
+package org.gloria.jsonparser;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
