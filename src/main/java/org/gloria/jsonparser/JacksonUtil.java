@@ -1,5 +1,6 @@
-package org.gloria.jsonparser;
+package org.gloria.zhihu.utils;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -23,6 +24,7 @@ public class JacksonUtil {
 
     static {
         mapper = new ObjectMapper();
+        mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
     }
 
     /**
@@ -32,7 +34,7 @@ public class JacksonUtil {
      * @param <T>
      * @return
      */
-    public <T> T fromJson(String json, Class<T> clazz) {
+    public static <T> T fromJson(String json, Class<T> clazz) {
         try {
             return mapper.readValue(json, clazz);
         } catch (IOException e) {
@@ -46,7 +48,7 @@ public class JacksonUtil {
      * @param <T>
      * @return
      */
-    public <T> List<T> fromJson(String json) {
+    public static <T> List<T> fromJson(String json) {
         try {
             return mapper.readValue(json, new TypeReference<List<T>>(){});
         } catch (IOException e) {
@@ -57,10 +59,9 @@ public class JacksonUtil {
     /**
      * 对象 转 json
      * @param obj
-     * @param <T>
      * @return
      */
-    public <T> String toJson(Object obj) {
+    public static String toJson(Object obj) {
         try {
             return mapper.writeValueAsString(obj);
         } catch (JsonProcessingException e) {
@@ -74,7 +75,7 @@ public class JacksonUtil {
      * @param <T>
      * @return
      */
-    public <T> String toJson(Collection<T> collection) {
+    public static <T> String toJson(Collection<T> collection) {
         try {
             return mapper.writeValueAsString(collection);
         } catch (JsonProcessingException e) {
@@ -82,6 +83,29 @@ public class JacksonUtil {
         }
     }
 
+    public static JsonNode toJsonNode(String json) {
+        try {
+            return mapper.readTree(json);
+        } catch (IOException e) {
+            return null;
+        }
+    }
+
+    public static Long getLongValue(JsonNode node, String key) {
+        return node.get(key).asLong();
+    }
+
+    public static String getTextValue(JsonNode node, String key) {
+        return node.get(key).asText();
+    }
+
+    public static Integer getIntValue(JsonNode node, String key) {
+        return node.get(key).asInt();
+    }
+
+    public static Boolean getBoolValue(JsonNode node, String key) {
+        return node.get(key).asBoolean();
+    }
 
     public static void main(String[] args) throws IOException {
         OkHttpClient client = new OkHttpClient();
