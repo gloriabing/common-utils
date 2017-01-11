@@ -1,7 +1,6 @@
 package org.gloria.http;
 
-import okhttp3.FormBody;
-import okhttp3.RequestBody;
+import okhttp3.*;
 import org.gloria.utils.ResourcesUtil;
 import org.junit.Test;
 import org.omg.SendingContext.RunTime;
@@ -41,7 +40,6 @@ public class HttpsUtilTest {
         }
 
         url = "https://www.zhihu.com/login/email";
-
         
         Map<String, String> map = new HashMap<>();
         map.put("_xsrf", xsrfValue);
@@ -58,6 +56,5 @@ public class HttpsUtilTest {
         System.out.println(body);
         
     }
-
 
 }
